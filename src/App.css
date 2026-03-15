@@ -2,18 +2,22 @@
   display:flex;
   flex-direction:column;
   align-items:center;
-  padding:40px 20px;
+  padding:30px 16px;
   min-height:100vh;
   background:linear-gradient(135deg,#eef2f7,#dfe7f3);
   font-family:Segoe UI, sans-serif;
+  width:100%;
+  box-sizing:border-box;
 }
 
 .filters{
   display:flex;
   gap:12px;
   margin-bottom:30px;
-  flex-wrap:wrap; /* allows wrapping on small screens */
+  flex-wrap:wrap;
   justify-content:center;
+  width:100%;
+  max-width:700px;
 }
 
 .filters input,
@@ -23,6 +27,18 @@
   border:1px solid #ccc;
   font-size:14px;
   transition:all .2s ease;
+  box-sizing:border-box;
+}
+
+.filters input{
+  flex:1;
+  min-width:0;
+}
+
+@media (min-width:501px){
+  .filters select{
+    flex:0 0 180px;
+  }
 }
 
 .filters input:focus,
@@ -34,9 +50,7 @@
 
 .staff-grid{
   display:grid;
-  
   grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
-
   gap:20px;
   width:100%;
   max-width:700px;
@@ -48,12 +62,13 @@
   border-radius:12px;
   cursor:pointer;
   box-shadow:0 4px 12px rgba(0,0,0,.1);
-
+  width:100%;
+  box-sizing:border-box;
   transition:transform .25s ease, box-shadow .25s ease;
 }
 
 .staff-card:hover{
-  transform:translateY(-6px) scale(1.03);
+  transform:translateY(-6px) scale(1.02);
   box-shadow:0 12px 30px rgba(0,0,0,.2);
 }
 
@@ -82,16 +97,16 @@
 .badge.marketing{background:#ff9800;}
 .badge.product{background:#2ecc71;}
 
-
 .detail-card{
   background:white;
-  padding:30px;
+  padding:24px;
   width:100%;
-  max-width:380px; /* prevents overflow on phones */
+  max-width:380px;
   border-radius:14px;
   box-shadow:0 8px 20px rgba(0,0,0,.15);
   text-align:justify;
   color:#1a1a1a;
+  box-sizing:border-box;
 }
 
 h2{
@@ -122,16 +137,45 @@ button:hover{
   font-weight:600;
 }
 
-@media (max-width: 500px){
+@media (max-width:500px){
+  .container{
+    padding:20px 14px;
+  }
 
   .filters{
     flex-direction:column;
+    align-items:center;
+    gap:10px;
     width:100%;
   }
 
-  .filters input,
+  .filters input{
+    width:100%;
+    max-width:320px;
+  }
+
   .filters select{
+    flex:1 1 auto;
     width:100%;
+    max-width:320px;
+    padding:10px 14px;
+    font-size:14px;
+    height:40px;
+    box-sizing:border-box;
+    -webkit-appearance:none;
+    appearance:none;
   }
 
+  .staff-grid{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  .staff-card{
+    padding:16px;
+  }
+
+  .detail-card{
+    padding:20px;
+  }
 }
