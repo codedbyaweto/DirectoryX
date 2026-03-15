@@ -1,9 +1,8 @@
-
 .container{
   display:flex;
   flex-direction:column;
   align-items:center;
-  padding-top:60px;
+  padding:40px 20px;
   min-height:100vh;
   background:linear-gradient(135deg,#eef2f7,#dfe7f3);
   font-family:Segoe UI, sans-serif;
@@ -13,6 +12,8 @@
   display:flex;
   gap:12px;
   margin-bottom:30px;
+  flex-wrap:wrap; /* allows wrapping on small screens */
+  justify-content:center;
 }
 
 .filters input,
@@ -33,8 +34,12 @@
 
 .staff-grid{
   display:grid;
-  grid-template-columns:repeat(2, 260px);
+  
+  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+
   gap:20px;
+  width:100%;
+  max-width:700px;
 }
 
 .staff-card{
@@ -42,12 +47,9 @@
   padding:20px;
   border-radius:12px;
   cursor:pointer;
-
   box-shadow:0 4px 12px rgba(0,0,0,.1);
 
-  transition:
-          transform .25s ease,
-          box-shadow .25s ease;
+  transition:transform .25s ease, box-shadow .25s ease;
 }
 
 .staff-card:hover{
@@ -60,13 +62,11 @@
   color:#2c3e50;
 }
 
-/* EMAIL */
 .staff-card p{
   font-size:14px;
   color:#666;
 }
 
-/* BADGES */
 .badge{
   display:inline-block;
   margin-top:10px;
@@ -82,21 +82,22 @@
 .badge.marketing{background:#ff9800;}
 .badge.product{background:#2ecc71;}
 
+
 .detail-card{
   background:white;
   padding:30px;
-  width:380px;
+  width:100%;
+  max-width:380px; /* prevents overflow on phones */
   border-radius:14px;
   box-shadow:0 8px 20px rgba(0,0,0,.15);
-  text-align: justify;
-  color: #1a1a1a;
+  text-align:justify;
+  color:#1a1a1a;
 }
 
-h2 {
-  font-weight: bold;
-  color: #1a1a1a;
+h2{
+  font-weight:bold;
+  color:#1a1a1a;
 }
-
 
 button{
   margin-top:20px;
@@ -119,4 +120,18 @@ button:hover{
   text-align:center;
   color:#e74c3c;
   font-weight:600;
+}
+
+@media (max-width: 500px){
+
+  .filters{
+    flex-direction:column;
+    width:100%;
+  }
+
+  .filters input,
+  .filters select{
+    width:100%;
+  }
+
 }
