@@ -1,6 +1,8 @@
-import { useState, type ChangeEvent } from "react";
+//Imports
+import {useState, type ChangeEvent} from "react";
 
-interface StaffMember {
+//Types
+type StaffMember = {
     id: number;
     name: string;
     email: string;
@@ -8,6 +10,7 @@ interface StaffMember {
     bio: string;
 }
 
+//Staff Array of objects
 const staffs: StaffMember[] = [
     {
         id: 1,
@@ -67,14 +70,16 @@ const staffs: StaffMember[] = [
     }
 ];
 
-
+//Main component
 const StaffDirectory = () => {
     const [search, setSearch] = useState("");
     const [department, setDepartment] = useState("");
     const [selected, setSelected] = useState<StaffMember | null>(null);
 
+    //Filtering process
     let filteredStaffs = staffs;
 
+    //Filter staffs by search - req2
     if (search !== "") {
         const term = search.toLowerCase();
         filteredStaffs = filteredStaffs.filter(staff =>
@@ -83,10 +88,12 @@ const StaffDirectory = () => {
         );
     }
 
+    //Filter staffs by department -req3
     if (department !== "") {
         filteredStaffs = filteredStaffs.filter(staff => staff.department === department);
     }
 
+    //Details of a selected staff- Req5
     if (selected) {
         return (
             <div className="container">
@@ -101,6 +108,7 @@ const StaffDirectory = () => {
         );
     }
 
+    //Main staff directory
     return (
         <div className="container">
 
@@ -110,6 +118,7 @@ const StaffDirectory = () => {
                     value={search}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
                 />
+
 
                 <select
                     value={department}
@@ -124,29 +133,22 @@ const StaffDirectory = () => {
             </div>
 
             <div className="staff-grid">
-
-                {(search !== "" || department !== "") ? (
-                    filteredStaffs.length > 0 ? (
-                        filteredStaffs.map(staff => (
-                            <div
-                                key={staff.id}
-                                className="staff-card"
-                                onClick={() => setSelected(staff)}
-                            >
-                                <h3>{staff.name}</h3>
-                                <p>{staff.email}</p>
-                                <span className={`badge ${staff.department.toLowerCase()}`}>
-                                    {staff.department}
-                                </span>
-                            </div>
-                        ))
-                    ) : (
-                        <p className="no-staff">No staff found</p>
-                    )
-                ) : null}
-
+                {filteredStaffs.length > 0 ? (
+                    filteredStaffs.map(staff => (
+                        <div
+                            key={staff.id}
+                            className="staff-card"
+                            onClick={() => setSelected(staff)}
+                        >
+                            <h3>{staff.name}</h3>
+                            <p>{staff.email}</p>
+                            <span className={`badge ${staff.department.toLowerCase()}`}>{staff.department}</span>
+                        </div>
+                    ))
+                ) : (
+                    <p className="no-staff">No staff found</p>
+                )}
             </div>
-
         </div>
     );
 }
